@@ -4,6 +4,7 @@ var Startup = /** @class */ (function () {
     Startup.prototype.main = function () {
         d3.selectAll("p").style("color", "white");
         $("p").hide();
+        console.log('test');
         return 1;
     };
     return Startup;
