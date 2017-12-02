@@ -1,10 +1,11 @@
 var Startup = /** @class */ (function () {
     function Startup() {
     }
-    Startup.main = function () {
-        console.log('Hello World');
+    Startup.prototype.main = function () {
+        d3.selectAll("p").style("color", "white");
         return 1;
     };
     return Startup;
 }());
-Startup.main();
+new Startup().main();
+//# sourceMappingURL=index.js.map
