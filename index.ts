@@ -1,8 +1,9 @@
 class Startup {
-    public static main(): number {
-        console.log('Hello World');
+
+    public main(): number {
+        d3.selectAll("p").style("color", "white");
         return 1;
     }
 }
 
-Startup.main();
+new Startup().main();
