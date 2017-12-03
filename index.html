@@ -1,41 +1,65 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <script src="jquery-3.2.1.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
     <title>UFC Analysis</title>
 </head>
 
 <body>
-    <h1 class="main title">event locations over the years</h1>
-
-    <div class="charts">
-            <div class="chart-1">
-                <h1 class="title chart-title chart-title-1">2000</h1>
-                <svg class="chart1" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+    <div id="fullpage">
+        <div class="section">
+            <h1 class="main title">event locations over the years</h1>
+            
+            <div class="charts">
+                    <div class="chart-1">
+                        <h1 class="title chart-title chart-title-1">2000</h1>
+                        <svg class="chart1" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+                    </div>
+                
+                    <div class="chart-2">
+                            <h1 class="title chart-title chart-title-1">2005</h1>
+                            <svg class="chart2" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+                    </div>
+                
+                    <div class="chart-3">
+                            <h1 class="title chart-title chart-title-1">2010</h1>
+                            <svg class="chart3" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+                    </div>
+                
+                    <div class="chart-4">
+                            <h1 class="title chart-title chart-title-1 bold">Now</h1>
+                            <svg class="chart4" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+                    </div>
             </div>
-        
-            <div class="chart-2">
-                    <h1 class="title chart-title chart-title-1">2005</h1>
-                    <svg class="chart2" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+            
+            <i class="arrow down"></i><br>
+        </div>
+        <div class="section">
+            <div class="slide">
+                <div class="content">
+                    <h1 class="main title second-page">knockout ratios over the years</h1>
+                </div>
             </div>
-        
-            <div class="chart-3">
-                    <h1 class="title chart-title chart-title-1">2010</h1>
-                    <svg class="chart3" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+            <div class="slide">
+                <div class="content">
+                    <h1 class="main title second-page">test</h1>
+                </div>
             </div>
-        
-            <div class="chart-4">
-                    <h1 class="title chart-title chart-title-1 bold">Now</h1>
-                    <svg class="chart4" width="450" height="450" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
-            </div>
+        </div>
+        <div class="section">
+            <h1 class="main title">fouls over the years</h1>
+        </div>
     </div>
-
-    <i item-height="75px" item-width="75px" class="arrow down"></i>
 </body>
+
+<footer>
+    <script type="text/javascript" src="http://expansionscollective.com/testscripts/jquery.fullPage.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</footer>
 
 </html>
 
-<script type="text/javascript" src="index.js"></script>

@@ -1,3 +1,8 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
 @font-face {
     font-family: Junction;
     src: url("Junction-regular.otf") format("opentype");
@@ -9,8 +14,7 @@
     src: url("Junction-bold.otf") format("opentype");
 }
 
-body{
-	background: #283048;  /* fallback for old browsers */ 
+body {
 	text-align: center;
 }
 
@@ -20,39 +24,48 @@ h1 {
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 500;
-	line-height: 26.4px;
+	margin-top: 0px;
+	margin-left: 0px;
 }
+
 h3 {
 	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
 	font-size: 14px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 500;
-	line-height: 15.4px;
+	margin-top: 0px;
+	margin-left: 0px;
 }
+
 p {
 	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
 	font-size: 14px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 400;
-	line-height: 20px;
+	margin-top: 0px;
+	margin-left: 0px;
 }
+
 blockquote {
 	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
 	font-size: 21px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 400;
-	line-height: 30px;
+	margin-top: 0px;
+	margin-left: 0px;
 }
+
 pre {
 	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
 	font-size: 13px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 400;
-	line-height: 18.5714px;
+	margin-top: 0px;
+	margin-left: 0px;
 }
 
 .bold {
@@ -62,17 +75,15 @@ pre {
 .title {
     color: white;
 	text-align: center;
-	margin-top: 100px;
-	margin-bottom: 50px;
+	padding-top: 90px;
 }
 
 .title.main{
 	font-size: 50px;
 }
 
-.chart-title {
-	text-align: center;
-	margin-bottom: 10px;
+.title.second-page{
+	color: #283048;
 }
 
 .chart-1, .chart-2, .chart-3, .chart-4 {
@@ -88,7 +99,7 @@ pre {
  
 .fade:hover {
 	opacity: 0.75;
-}
+} 
 
 i {
 	margin-top: 60px;
