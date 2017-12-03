@@ -15,8 +15,7 @@ class Startup {
             .size([width, height])
             .padding(1.5);
         
-        d3.csv("http://localhost:8888/ballchart-data.csv", function(d: any) {
-          console.log(d);
+        d3.csv("ballchart-data.csv", function(d: any) {
           d.value = +d.value;
           if (d.value) return d;
         }, function(error, classes) {

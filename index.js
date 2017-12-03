@@ -9,8 +9,7 @@ var Startup = /** @class */ (function () {
         var pack = d3.pack()
             .size([width, height])
             .padding(1.5);
-        d3.csv("http://localhost:8888/ballchart-data.csv", function (d) {
-            console.log(d);
+        d3.csv("ballchart-data.csv", function (d) {
             d.value = +d.value;
             if (d.value)
                 return d;
