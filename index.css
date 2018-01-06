@@ -1,118 +1,150 @@
-html, body {
-    margin: 0;
-    height: 100%;
+html,
+body {
+  margin: 0;
+  height: 100%;
 }
 
 @font-face {
-    font-family: Junction;
-    src: url("Junction-regular.otf") format("opentype");
+  font-family: Junction;
+  src: url("Junction-regular.otf") format("opentype");
 }
 
 @font-face {
-    font-family: Junction;
-    font-weight: bold;
-    src: url("Junction-bold.otf") format("opentype");
+  font-family: Junction;
+  font-weight: bold;
+  src: url("Junction-bold.otf") format("opentype");
 }
 
 body {
-	text-align: center;
+  text-align: center;
 }
 
 h1 {
-	font-family: "Junction", Helvetica Neue, Arial, sans-serif;
-	font-size: 32px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	margin-top: 0px;
-	margin-left: 0px;
+  font-family: "Junction", Helvetica Neue, Arial, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
 h3 {
-	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
-	font-size: 14px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	margin-top: 0px;
-	margin-left: 0px;
+  font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
 p {
-	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
-	font-size: 14px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	margin-top: 0px;
-	margin-left: 0px;
+  font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
 blockquote {
-	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
-	font-size: 21px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	margin-top: 0px;
-	margin-left: 0px;
+  font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
 pre {
-	font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
-	font-size: 13px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	margin-top: 0px;
-	margin-left: 0px;
+  font-family: "Junction", "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
 .bold {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .title {
-    color: white;
-	text-align: center;
-	padding-top: 90px;
+  color: white;
+  text-align: center;
+  padding-top: 90px;
 }
 
-.title.main{
-	font-size: 50px;
+.title.main {
+  font-size: 50px;
 }
 
-.title.second-page{
-	color: #283048;
+.title.second-page {
+  color: #283048;
+  padding-top: 20%;
 }
 
-.chart-1, .chart-2, .chart-3, .chart-4 {
-	display: inline-block;
+.chart-1,
+.chart-2,
+.chart-3,
+.chart-4 {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .fade {
-	opacity: 1;
-	transition: opacity .25s ease-in-out;
-	-moz-transition: opacity .25s ease-in-out;
-	-webkit-transition: opacity .25s ease-in-out;
+  opacity: 1;
+  transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
 }
- 
+
 .fade:hover {
-	opacity: 0.75;
-} 
+  opacity: 0.75;
+}
 
 i {
-	margin-top: 60px;
-    border: solid white;
-    border-width: 0 7px 7px 0;
-    display: inline-block;
-	padding: 3px;
-	height: 20px;
-	width: 20px;
-	
+  margin-top: 60px;
+  border: solid white;
+  border-width: 0 7px 7px 0;
+  display: inline-block;
+  padding: 3px;
+  height: 20px;
+  width: 20px;
 }
 
 .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden-opacity {
+  opacity: 0;
+}
+
+.story-text:not(.second-page) {
+  position: absolute;
+  bottom: 50%;
+  text-align: center;
+  width: 100%;
+  display: none;
+}
+
+.arrow.down.second-page {
+  border: solid #283048;
+  border-width: 0 7px 7px 0;
+}
+
+#second-page-arrow {
+  padding-top: 5%;
 }
