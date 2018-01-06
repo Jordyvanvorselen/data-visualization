@@ -148,3 +148,11 @@ i {
 .hidden-opacity {
     opacity: 0;
 }
+
+.bar {
+    fill: #27020e;
+}
+
+.title.third-page {
+    padding-top: 20%;
+}

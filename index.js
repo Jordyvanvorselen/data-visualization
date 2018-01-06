@@ -1,5 +1,6 @@
 var Startup = /** @class */ (function () {
     function Startup() {
+        this.storyFinished = false;
     }
     Startup.prototype.create_ball_chart = function (svgSelector, dataPath) {
         var svg = d3.select(svgSelector), width = +svg.attr("width"), height = +svg.attr("height");
@@ -152,6 +153,63 @@ var Startup = /** @class */ (function () {
                 .attr("d", line);
         });
     };
+    Startup.prototype.createBarChart = function () {
+        var svg = d3.select("svg.barchart"), margin = { top: 20, right: 20, bottom: 30, left: 40 }, width = +svg.attr("width") - margin.left - margin.right, height = +svg.attr("height") - margin.top - margin.bottom;
+        var x = d3
+            .scaleBand()
+            .rangeRound([0, width])
+            .padding(0.1), y = d3.scaleLinear().rangeRound([height, 0]);
+        var g = svg
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        d3.tsv("barchart.tsv", function (d) {
+            d.frequency = +d.frequency;
+            return d;
+        }, function (error, data) {
+            if (error)
+                throw error;
+            x.domain(data.map(function (d) {
+                return d.letter;
+            }));
+            y.domain([
+                0,
+                d3.max(data, function (d) {
+                    return d.frequency;
+                })
+            ]);
+            g
+                .append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+            g
+                .append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y).ticks(10, "%"))
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("text-anchor", "end")
+                .text("Frequency");
+            g
+                .selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", function (d) {
+                return x(d.letter);
+            })
+                .attr("y", function (d) {
+                return y(d.frequency);
+            })
+                .attr("width", x.bandwidth())
+                .attr("height", function (d) {
+                return height - y(d.frequency);
+            });
+        });
+    };
     Startup.prototype.startStory = function (fullpageElem) {
         var _this = this;
         this.progressStory("Do you think the UFC got more exciting in the last decades?", 2000, function () {
@@ -207,6 +265,25 @@ var Startup = /** @class */ (function () {
             });
         });
     };
+    Startup.prototype.startStoryThirdPage = function (fullpageElem) {
+        var _this = this;
+        $(".main.title.third-page")
+            .delay(1500)
+            .animate({
+            paddingTop: "5%"
+        }, 1000, function () {
+            $(".barchart")
+                .animate({
+                opacity: 1
+            }, 1000)
+                .delay(2000)
+                .fadeIn(0, function () {
+                fullpageElem.fullpage.setAllowScrolling(true);
+                fullpageElem.fullpage.setMouseWheelScrolling(true);
+                _this.storyFinished = true;
+            });
+        });
+    };
     Startup.prototype.fullpage = function () {
         var _this = this;
         var elem = $("#fullpage");
@@ -216,12 +293,17 @@ var Startup = /** @class */ (function () {
             slidesNavigation: true,
             slidesNavPosition: "bottom",
             onLeave: function (index, nextIndex, direction) {
-                elem.fullpage.setAllowScrolling(false);
-                elem.fullpage.setMouseWheelScrolling(false);
+                if (!_this.storyFinished) {
+                    elem.fullpage.setAllowScrolling(false);
+                    elem.fullpage.setMouseWheelScrolling(false);
+                }
                 if (index == 1) {
                     _this.startStorySecondPage(elem);
                 }
-                if (index > nextIndex) {
+                if (index == 2) {
+                    _this.startStoryThirdPage(elem);
+                }
+                if (index > nextIndex && !_this.storyFinished) {
                     return false;
                 }
             },
@@ -231,6 +313,7 @@ var Startup = /** @class */ (function () {
                 new Startup().create_ball_chart("svg.chart3", "ballchart-data-3.csv");
                 new Startup().create_ball_chart("svg.chart4", "ballchart-data-4.csv");
                 new Startup().createLineChart();
+                new Startup().createBarChart();
             }
         });
         elem.fullpage.setAllowScrolling(false);
