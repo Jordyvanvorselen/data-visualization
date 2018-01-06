@@ -276,7 +276,12 @@ class Startup {
             .fadeIn(0, () => {
               fullpageElem.fullpage.setAllowScrolling(true);
               fullpageElem.fullpage.setMouseWheelScrolling(true);
-              $(".arrow.down.second-page").fadeIn(2000);
+              $(".arrow.down.second-page").animate(
+                {
+                  opacity: 1
+                },
+                1000
+              );
             });
         }
       );
