@@ -1,6 +1,9 @@
 var Startup = /** @class */ (function () {
     function Startup() {
         this.storyFinished = false;
+        this.firstPageFinished = false;
+        this.secondPageFinished = false;
+        this.thirdPageFinished = false;
     }
     Startup.prototype.create_ball_chart = function (svgSelector, dataPath) {
         var svg = d3.select(svgSelector), width = +svg.attr("width"), height = +svg.attr("height");
@@ -217,7 +220,7 @@ var Startup = /** @class */ (function () {
                 return _this.progressStory("Let's take a look at the amount of events and locations", 1000, function () {
                     $(".main.title.story-text")
                         .animate({
-                        bottom: "75%"
+                        bottom: "80%"
                     }, 1000)
                         .delay(500)
                         .fadeIn(0, function () {
@@ -235,7 +238,7 @@ var Startup = /** @class */ (function () {
                                     }, 2000, function () {
                                         fullpageElem.fullpage.setAllowScrolling(true);
                                         fullpageElem.fullpage.setMouseWheelScrolling(true);
-                                        $(".arrow.down").fadeIn(2000);
+                                        $(".arrow.down").fadeIn(1000);
                                     });
                                 });
                             });
@@ -246,6 +249,7 @@ var Startup = /** @class */ (function () {
         });
     };
     Startup.prototype.startStorySecondPage = function (fullpageElem) {
+        fullpageElem.fullpage.moveSectionDown();
         $(".main.title.second-page")
             .delay(1500)
             .animate({
@@ -255,7 +259,7 @@ var Startup = /** @class */ (function () {
                 .animate({
                 opacity: 1
             }, 1000)
-                .delay(2000)
+                .delay(1000)
                 .fadeIn(0, function () {
                 fullpageElem.fullpage.setAllowScrolling(true);
                 fullpageElem.fullpage.setMouseWheelScrolling(true);
@@ -266,7 +270,7 @@ var Startup = /** @class */ (function () {
         });
     };
     Startup.prototype.startStoryThirdPage = function (fullpageElem) {
-        var _this = this;
+        fullpageElem.fullpage.moveSectionDown();
         $(".main.title.third-page")
             .delay(1500)
             .animate({
@@ -276,11 +280,13 @@ var Startup = /** @class */ (function () {
                 .animate({
                 opacity: 1
             }, 1000)
-                .delay(2000)
+                .delay(1000)
                 .fadeIn(0, function () {
                 fullpageElem.fullpage.setAllowScrolling(true);
                 fullpageElem.fullpage.setMouseWheelScrolling(true);
-                _this.storyFinished = true;
+                $(".arrow.down.third-page").animate({
+                    opacity: 1
+                }, 1000);
             });
         });
     };
@@ -288,7 +294,7 @@ var Startup = /** @class */ (function () {
         var _this = this;
         var elem = $("#fullpage");
         elem.fullpage({
-            sectionsColor: ["#283048", "lightgray", "#283048"],
+            sectionsColor: ["#283048", "lightgray", "#283048", "lightgray"],
             css3: true,
             slidesNavigation: true,
             slidesNavPosition: "bottom",
@@ -298,10 +304,45 @@ var Startup = /** @class */ (function () {
                     elem.fullpage.setMouseWheelScrolling(false);
                 }
                 if (index == 1) {
-                    _this.startStorySecondPage(elem);
+                    if (!_this.storyFinished && !_this.firstPageFinished) {
+                        var storyElem = $(".story-text");
+                        storyElem.fadeOut(1000, function () {
+                            storyElem
+                                .text("Seems like the UFC is a lot more popular nowadays")
+                                .fadeIn(4000, function () { return _this.startStorySecondPage(elem); });
+                        });
+                        _this.firstPageFinished = true;
+                        return false;
+                    }
                 }
                 if (index == 2) {
-                    _this.startStoryThirdPage(elem);
+                    if (!_this.storyFinished && !_this.secondPageFinished) {
+                        var storyElem = $(".main.title.second-page");
+                        storyElem.fadeOut(1000, function () {
+                            storyElem
+                                .text("Mhm, the knockout ratio's didn't get any worse")
+                                .fadeIn(4000, function () { return _this.startStoryThirdPage(elem); });
+                        });
+                        _this.secondPageFinished = true;
+                        return false;
+                    }
+                }
+                if (index == 3) {
+                    if (!_this.storyFinished && !_this.thirdPageFinished) {
+                        var storyElem = $(".main.title.third-page");
+                        storyElem.fadeOut(1000, function () {
+                            storyElem
+                                .text("The UFC got more professional it seems")
+                                .fadeIn(4000, function () {
+                                elem.fullpage.moveSectionDown();
+                                _this.storyFinished = true;
+                                elem.fullpage.setAllowScrolling(true);
+                                elem.fullpage.setMouseWheelScrolling(true);
+                            });
+                        });
+                        _this.thirdPageFinished = true;
+                        return false;
+                    }
                 }
                 if (index > nextIndex && !_this.storyFinished) {
                     return false;

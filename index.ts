@@ -1,5 +1,8 @@
 class Startup {
   public storyFinished: boolean = false;
+  public firstPageFinished: boolean = false;
+  public secondPageFinished: boolean = false;
+  public thirdPageFinished: boolean = false;
 
   public create_ball_chart(svgSelector: string, dataPath: string): void {
     var svg = d3.select(svgSelector),
@@ -281,7 +284,7 @@ class Startup {
               $(".main.title.story-text")
                 .animate(
                   {
-                    bottom: "75%"
+                    bottom: "80%"
                   },
                   1000
                 )
@@ -315,7 +318,7 @@ class Startup {
                                   fullpageElem.fullpage.setMouseWheelScrolling(
                                     true
                                   );
-                                  $(".arrow.down").fadeIn(2000);
+                                  $(".arrow.down").fadeIn(1000);
                                 }
                               );
                             }
@@ -333,6 +336,7 @@ class Startup {
   }
 
   public startStorySecondPage(fullpageElem: any) {
+    fullpageElem.fullpage.moveSectionDown();
     $(".main.title.second-page")
       .delay(1500)
       .animate(
@@ -348,7 +352,7 @@ class Startup {
               },
               1000
             )
-            .delay(2000)
+            .delay(1000)
             .fadeIn(0, () => {
               fullpageElem.fullpage.setAllowScrolling(true);
               fullpageElem.fullpage.setMouseWheelScrolling(true);
@@ -364,6 +368,7 @@ class Startup {
   }
 
   public startStoryThirdPage(fullpageElem: any) {
+    fullpageElem.fullpage.moveSectionDown();
     $(".main.title.third-page")
       .delay(1500)
       .animate(
@@ -379,11 +384,16 @@ class Startup {
               },
               1000
             )
-            .delay(2000)
+            .delay(1000)
             .fadeIn(0, () => {
               fullpageElem.fullpage.setAllowScrolling(true);
               fullpageElem.fullpage.setMouseWheelScrolling(true);
-              this.storyFinished = true;
+              $(".arrow.down.third-page").animate(
+                {
+                  opacity: 1
+                },
+                1000
+              );
             });
         }
       );
@@ -392,7 +402,7 @@ class Startup {
   public fullpage(): any {
     var elem: any = $("#fullpage");
     elem.fullpage({
-      sectionsColor: ["#283048", "lightgray", "#283048"],
+      sectionsColor: ["#283048", "lightgray", "#283048", "lightgray"],
       css3: true,
       slidesNavigation: true,
       slidesNavPosition: "bottom",
@@ -403,11 +413,50 @@ class Startup {
         }
 
         if (index == 1) {
-          this.startStorySecondPage(elem);
+          if (!this.storyFinished && !this.firstPageFinished) {
+            var storyElem: JQuery = $(".story-text");
+            storyElem.fadeOut(1000, () => {
+              storyElem
+                .text("Seems like the UFC is a lot more popular nowadays")
+                .fadeIn(4000, () => this.startStorySecondPage(elem));
+            });
+
+            this.firstPageFinished = true;
+            return false;
+          }
         }
 
         if (index == 2) {
-          this.startStoryThirdPage(elem);
+          if (!this.storyFinished && !this.secondPageFinished) {
+            var storyElem: JQuery = $(".main.title.second-page");
+            storyElem.fadeOut(1000, () => {
+              storyElem
+                .text("Mhm, the knockout ratio's didn't get any worse")
+                .fadeIn(4000, () => this.startStoryThirdPage(elem));
+            });
+
+            this.secondPageFinished = true;
+            return false;
+          }
+        }
+
+        if (index == 3) {
+          if (!this.storyFinished && !this.thirdPageFinished) {
+            var storyElem: JQuery = $(".main.title.third-page");
+            storyElem.fadeOut(1000, () => {
+              storyElem
+                .text("The UFC got more professional it seems")
+                .fadeIn(4000, () => {
+                  elem.fullpage.moveSectionDown();
+                  this.storyFinished = true;
+                  elem.fullpage.setAllowScrolling(true);
+                  elem.fullpage.setMouseWheelScrolling(true);
+                });
+            });
+
+            this.thirdPageFinished = true;
+            return false;
+          }
         }
 
         if (index > nextIndex && !this.storyFinished) {
